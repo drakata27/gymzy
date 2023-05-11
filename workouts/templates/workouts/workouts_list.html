@@ -3,18 +3,18 @@
 {% block content %}
 
 <div class="row row-cols3 g-2">
-    {% for workout in workouts %}
+    {% for exercise in workouts %}
         <div class="col">
             <div class="p-3 border">
-                <a href="{% url 'workouts.detail' pk=workout.id %}" 
+                <a href="{% url 'exercise_list' pk=exercise.id %}" 
                 class="text-dark text-decoration-none">
-                <h3>{{workout.title}}</h3>
+                <h3>{{workouts.title}}</h3>
             </a>
-            <p>{{workout.created}}</p>
+            <p>{{exercise.created}}</p>
             </div>
         </div>
     {% endfor %}
 </div>
 
-<a href="{% url 'workouts.create' %}" class="btn btn-primary">Add</a>
+<a href="{% url 'exercise_add' %}" class="btn btn-primary">Add</a>
 {% endblock %}

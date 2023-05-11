@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% comment %} {% extends "base.html" %}
 
 {% block content %}
 <div class="border round">
@@ -13,4 +13,4 @@
   <a href="{% url 'workouts.edit' pk=workout.id%}" class="btn btn-primary">Edit</a>
   <a href="{% url 'workouts.list' %}" class="btn btn-secondary">Back</a>
   <a href="{% url 'workouts.delete' pk=workout.id %}" class="btn btn-danger">Delete</a>
-{% endblock %}
+{% endblock %} {% endcomment %}
