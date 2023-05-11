@@ -13,4 +13,4 @@ class WorkoutsForm(forms.ModelForm):
 class ExerciseForm(forms.ModelForm):
     class Meta:
         model = Exercise
-        fields = ('exercise', 'weight', 'reps', 'sets',)
+        fields = ('exercise', 'weight', 'reps', 'sets','workouts',)

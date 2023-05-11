@@ -1,16 +1,20 @@
-{% comment %} {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <div class="border round">
-    <h1 class="my-5">{{workout.title}}</h1>
-    <p class="note-li">{{workout.exercise}}</p>
-    <p class="note-li">{{workout.weight}}kg</p>
-    <p class="note-li">Reps: {{workout.reps}}</p>
-    <p class="note-li">Sets: {{workout.sets}}</p>
-    <p class="note-li">{{workout.created}}</p>
+    <h1 class="my-5">{{ workout.title }}</h1>
+
+    {% for exercise in workout.exercise_set.all %}
+    <p>{{ exercise.exercise }}</p>
+    <p>{{ exercise.weight }}kg</p>
+    <p>{{ exercise.reps }} reps</p>
+    <p>{{ exercise.sets }} sets</p>
+    {% empty %}
+      <p>No exercises found.</p>
+    {% endfor %}
+    
   </div>
 
-  <a href="{% url 'workouts.edit' pk=workout.id%}" class="btn btn-primary">Edit</a>
-  <a href="{% url 'workouts.list' %}" class="btn btn-secondary">Back</a>
-  <a href="{% url 'workouts.delete' pk=workout.id %}" class="btn btn-danger">Delete</a>
-{% endblock %} {% endcomment %}
+  <a href="{% url 'workouts_list' %}" class="btn btn-secondary">Back</a>
+  <a href="{% url 'exercise_add' %}" class="btn btn-secondary">Add</a>
+{% endblock %}
