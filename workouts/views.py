@@ -8,6 +8,11 @@ from .forms import WorkoutsForm
 from .models import Workouts
 
 # Create your views here.
+class WorkoutsDetailListView(ListView):
+    model = Workouts
+    context_object_name = 'workoutdetails'
+    template_name = 'workouts/workouts_detail_list.html'
+
 class WorkoutsDeleteView(DeleteView):
     model = Workouts
     success_url = '/workouts'
@@ -34,4 +39,3 @@ class WorkoutsListView(ListView):
 class WorkoutsDetailView(DetailView):
     model = Workouts
     context_object_name = 'workout'
-
