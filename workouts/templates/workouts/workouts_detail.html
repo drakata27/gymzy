@@ -5,16 +5,18 @@
     <h1 class="my-5">{{ workout.title }}</h1>
 
     {% for exercise in workout.exercise_set.all %}
-    <p>{{ exercise.exercise }}</p>
-    <p>{{ exercise.weight }}kg</p>
-    <p>{{ exercise.reps }} reps</p>
-    <p>{{ exercise.sets }} sets</p>
+    <div class="exercise-details border round">
+      <h2>{{ exercise.exercise }}</h2>
+      <p>{{ exercise.weight }}kg</p>
+      <p>{{ exercise.reps }} reps</p>
+      <p>{{ exercise.sets }} sets</p>
+    </div>
     {% empty %}
       <p>No exercises found.</p>
     {% endfor %}
     
   </div>
 
+  <a href="{% url 'exercise_add' workout.id %}" class="btn btn-primary">Add</a>
   <a href="{% url 'workouts_list' %}" class="btn btn-secondary">Back</a>
-  <a href="{% url 'exercise_add' %}" class="btn btn-secondary">Add</a>
 {% endblock %}

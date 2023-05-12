@@ -1,7 +1,7 @@
 from typing import Any, Dict
-from django.urls import reverse
-from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.forms.models import BaseModelForm
+from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView,DetailView, ListView, UpdateView
 from django.views.generic.edit import DeleteView
 
@@ -22,10 +22,10 @@ class WorkoutsDetailView(DetailView):
     model = Workouts
     context_object_name = 'workout'
 
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        context['exercise_list'] = Exercise.objects.all()
-        return context
+    # def get_context_data(self, **kwargs: Any):
+    #     context = super().get_context_data(**kwargs)
+    #     context['exercise_list'] = Exercise.objects.all()
+    #     return context
 
          
 
@@ -39,7 +39,28 @@ class ExerciseCreateView(CreateView):
     model = Exercise
     template_name = 'workouts/exercise_form.html'
     form_class = ExerciseForm
-    success_url = 'workouts/<int:pk>/'
+    success_url = '/workouts/detail/'
+    
+    def form_valid(self, form):
+        workout_id = form.instance.workouts.id
+        self.object = form.save(commit=False)
+        self.object.submitted_by = self.request.user
+        self.object.save()
+        
+        if form.is_valid:
+            form.save()
+        return redirect(reverse_lazy('workouts_detail', args=[workout_id]))
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {'workouts': self.kwargs['workout_id']}
+        return kwargs
+    
+    def get_success_url(self):
+        return '/workouts/{}/'.format(self.kwargs['workout_id'])
+        
+    
+    
 # Old
 
 # class WorkoutsDeleteView(DeleteView):
