@@ -18,7 +18,7 @@ class Exercise(models.Model):
     #         self.fields['workout'].initial = workout_id
 
     exercise = models.CharField(max_length=100)
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
+    weight = models.DecimalField(max_digits=6, decimal_places=2)
     reps = models.IntegerField()
     sets = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
