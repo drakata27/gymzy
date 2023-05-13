@@ -5,6 +5,7 @@
   <div>
     <h1 class="my-5">{{ workout.title }}</h1>
     <a href="{% url 'workouts_edit' workout.id %}" class="btn btn-primary edit-btn">Edit</a>
+    <a href="{% url 'workouts_delete' pk=workout.id %}" class="btn btn-danger del-btn">Delete</a>
   </div>
 
     {% for exercise in workout.exercise_set.all %}
@@ -14,7 +15,7 @@
       <p>{{ exercise.reps }} reps</p>
       <p>{{ exercise.sets }} sets</p>
       <a href="{% url 'exercise_edit' exercise.id %}" class="btn btn-primary edit-btn">Edit</a>
-      {% comment %} <a href="{% url 'exercise_edit' workout.id %}" class="btn btn-danger">Delete</a> {% endcomment %}
+      <a href="{% url 'exercise_delete' pk=exercise.id %}" class="btn btn-danger del-btn">Delete</a>
     </div>
     {% empty %}
       <p>No exercises found.</p>

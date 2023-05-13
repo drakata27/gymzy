@@ -6,6 +6,6 @@ div {
     border: 1px solid blue;
 }
 
-.edit-btn {
+.edit-btn, .del-btn {
     margin: 20px;
 }

@@ -9,10 +9,18 @@ from .forms import WorkoutsForm, ExerciseForm
 from .models import Workouts, Exercise
 
 # Workouts
+class WorkoutsDeleteView(DeleteView):
+    model = Workouts
+    template_name = 'workouts/workouts_delete.html'
+    success_url = '/workouts'
+    
+
 class WorkoutsCreateView(CreateView):
     model = Workouts
-    success_url = '/exercise/add'
     form_class = WorkoutsForm
+
+    def get_success_url(self):
+        return reverse_lazy('workouts_detail', args=[self.object.pk])
 
 class WorkoutsUpdateView(UpdateView):
     model = Workouts
@@ -32,6 +40,15 @@ class WorkoutsDetailView(DetailView):
          
 
 # Exercise
+class ExerciseDeleteView(DeleteView):
+    model = Exercise
+    template_name = 'workouts/exercise_delete.html'
+
+    def get_success_url(self):
+        workout_id = self.object.workouts.id
+        return reverse_lazy('workouts_detail', kwargs={'pk': workout_id})
+    
+
 class ExerciseListView(ListView):
     model = Exercise
     context_object_name = 'exercise'
@@ -63,7 +80,6 @@ class ExerciseCreateView(CreateView):
     
 class ExerciseUpdateView(UpdateView):
     model = Exercise
-    # template_name = 'workouts/exercise_form.html'
     form_class = ExerciseForm
     
     # Check
