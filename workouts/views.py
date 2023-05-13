@@ -37,8 +37,6 @@ class WorkoutsDetailView(DetailView):
     model = Workouts
     context_object_name = 'workout'
 
-         
-
 # Exercise
 class ExerciseDeleteView(DeleteView):
     model = Exercise
@@ -92,29 +90,6 @@ class ExerciseUpdateView(UpdateView):
         if form.is_valid:
             form.save()
         return redirect(reverse_lazy('workouts_detail', args=[workout_id]))
-    
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['initial'] = {'workouts': self.kwargs['workout_id']}
-    #     return kwargs
-    
-    # def get_success_url(self):
-    #     return '/workouts/{}/'.format(self.kwargs['workout_id'])
-
-        
-    
-    
-# Old
-
-# class WorkoutsDeleteView(DeleteView):
-#     model = Workouts
-#     success_url = '/workouts'
-#     template_name = 'workouts/workouts_delete.html'
-
-# class WorkoutsUpdateView(UpdateView):
-#     model = Workouts
-#     success_url = '/workouts'
-#     form_class = WorkoutsForm
 
 
     
